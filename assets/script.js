@@ -95,11 +95,12 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword(getUserSelection());
-  if (!password) {
-    return;
-  }
   var passwordText = document.querySelector("#password");
-
+   if (!password) {
+    passwordText.value = 
+    "Please select atleast one type of character to generate a unique password.";
+    return;
+  } 
   passwordText.value = password;
 }
 
@@ -125,7 +126,7 @@ function getUserSelection() {
 
   // validating user input
   if (!isSplChars && !isNumeric && !isLowerCase && !isUpperCase) {
-    document.getElementById("password").innerHTML =
+    document.getElementById("password").innerText =
       "Please select atleast one type of character to generate a unique password.";
     return;
   } else {
