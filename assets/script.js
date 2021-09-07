@@ -94,7 +94,6 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-
   var password = generatePassword(getUserSelection());
   if (!password) {
     return;
@@ -107,39 +106,27 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+// To clear the text area
 
-// To clear the text area 
-
-function clearTextarea()
-{
+/* function clearTextarea() {
   document.getElementById("#password").value = "";
-
-}
+} */
 
 // Getting user's input
 
-function getUserSelection() {
-  var pwdLength = prompt(
-    "Choose the length of the password: 8 - 128 characters"
-  );
-  // validating user input
-  if (pwdLength < 8 || pwdLength > 128) {
-    alert(
-      "Please enter a value between 8 - 128 characters for password length"
-    );
-    return;
-  }
+// This function gets user input from check boxes and range input types
 
-  var isSplChars = confirm("Do you want to include special characters?");
-  var isNumeric = confirm("Do you want to include numeric values?");
-  var isLowerCase = confirm("Do you want to include lowercase characters?");
-  var isUpperCase = confirm("Do you want to include uppercase characters?");
+function getUserSelection() {
+  var pwdLength = document.getElementById("pwdRange").value;
+  var isSplChars = document.getElementById("chkboxSplChars").checked;
+  var isUpperCase = document.getElementById("chkboxUpperCase").checked;
+  var isLowerCase = document.getElementById("chkboxLowerCase").checked;
+  var isNumeric = document.getElementById("chkboxNumbers").checked;
 
   // validating user input
   if (!isSplChars && !isNumeric && !isLowerCase && !isUpperCase) {
-    alert(
-      "Please choose atleast one type of character to generate a unique password."
-    );
+    document.getElementById("password").innerHTML =
+      "Please select atleast one type of character to generate a unique password.";
     return;
   } else {
     var userSelection = {
@@ -149,16 +136,9 @@ function getUserSelection() {
       hasUpperCaseChars: isUpperCase,
       hasNumber: isNumeric,
     };
+    return userSelection;
   }
-
-  /* var pwdLength = 10;
-var isSplChars = true;
-var isNumeric = true;
-var isLowerCase = true;
-var isUpperCase = true;   */
-
-  return userSelection;
-}
+  }
 
 // Functions to generate random characters
 
@@ -217,5 +197,4 @@ function generatePassword(userSelection) {
   }
 }
 
-/* console.log(generatePassword(getUserSelection()));
- */
+/* console.log(generatePassword(getUserSelection())); */
